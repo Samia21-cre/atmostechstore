@@ -34,7 +34,7 @@ class AdminCategoryController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);//phan trang
         $this->data['listCate'] = $listCate;
-        return view('admin.category.index', $this->data);
+        return view('Admin.category.index', $this->data);
     }
 
     /**
@@ -48,7 +48,7 @@ class AdminCategoryController extends Controller
         $listCate = DB::table('categories')
             ->orderBy('id','desc')->get();
         $this->data['listCate'] = $listCate;
-        return view('admin.category.create', $this->data);
+        return view('Admin.category.create', $this->data);
     }
 
     /**
@@ -100,7 +100,7 @@ class AdminCategoryController extends Controller
         $this->data['listCate'] = DB::table('categories')
             ->orderBy('id', 'desc')
             ->get();
-        return view('admin.category.edit', $this->data);
+        return view('Admin.category.edit', $this->data);
     }
 
     /**
