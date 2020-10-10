@@ -22,7 +22,7 @@ class AdminProductController extends Controller
     public function index()
     {
         $listProd = \App\Product::with(['categories'])->get();
-        return view('Admin.product.index',compact('listProd'));
+        return view('admin.product.index',compact('listProd'));
     }
 
     /**
@@ -36,7 +36,7 @@ class AdminProductController extends Controller
         $listCate = DB::table('categories')
             ->orderBy('id','desc')->get();
         $this->data['listCate'] = $listCate;
-        return view('Admin.product.create', $this->data);
+        return view('admin.product.create', $this->data);
     }
 
     /**
