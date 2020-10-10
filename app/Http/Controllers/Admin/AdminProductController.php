@@ -36,7 +36,7 @@ class AdminProductController extends Controller
         $listCate = DB::table('categories')
             ->orderBy('id','desc')->get();
         $this->data['listCate'] = $listCate;
-        return view('admin.product.create', $this->data);
+        return view('Admin.product.create', $this->data);
     }
 
     /**
@@ -101,7 +101,7 @@ class AdminProductController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('admin.product.edit', $this->data);
+        return view('Admin.product.edit', $this->data);
     }
 
     /**
@@ -146,13 +146,14 @@ class AdminProductController extends Controller
      */
     public function destroy($id)
     {
-        $parent_id = DB::table('category_product')->select('category_id')->where('product_id', $id)->get();
-        return $parent_id;
+        /*$parent_id = DB::table('category_product')->select('category_id')->where('product_id', $id)->get();
+        return $parent_id;*/
         /*$product = Product::find($id);
-        $product->categories()->detach($parent_id);
-       /// $product->delete();
+        $product->categories()->detach($parent_id);*/
+        $product = Product::find($id);
+        $product->delete();
         Session::flash('message', "Successfully delete category");
-        return Redirect::to('product');*/
+        return Redirect::to('product');
     
     }
 }
