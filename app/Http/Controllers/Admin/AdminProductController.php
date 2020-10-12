@@ -22,7 +22,8 @@ class AdminProductController extends Controller
     public function index()
     {
         $listProd = \App\Product::with(['categories'])->get();
-        return view('Admin.product.index');
+        $this->data['listProd'] = $listProd;
+        return view('Admin.product.index', $this->data);
     }
 
     /**
