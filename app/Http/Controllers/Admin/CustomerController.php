@@ -43,7 +43,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.customer.create');
     }
 
     /**
@@ -54,7 +54,28 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $avatar_path = '';
+
+        if ($request->hasFile('avatar')) {
+            $avatar_path = $request->file('avatar')->store('customers');
+        }
+
+        $customer = new Customer([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'avatar' => $avatar_path,
+            'user_id' => $request->user()->id,
+        ]);
+
+        $customer->save();
+        if (!$customer) {
+            return redirect()->back()->with('error', 'Sorry, there a problem while creating product.');
+        }
+        Session::flash('message', "Successfully created product");
+        return Redirect::to('product');
     }
 
     /**
@@ -99,6 +120,10 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        if ($customer->avatar) {
+            Storage::delete($customer->avatar);
+        }
+
+        $customer->delete();
     }
 }
