@@ -72,10 +72,10 @@ class CustomerController extends Controller
 
         $customer->save();
         if (!$customer) {
-            return redirect()->back()->with('error', 'Sorry, there a problem while creating product.');
+            return redirect()->back()->with('error', 'Sorry, there a problem while creating customer.');
         }
-        Session::flash('message', "Successfully created product");
-        return Redirect::to('product');
+        Session::flash('message', "Successfully created customer");
+        return Redirect::to('customer');
     }
 
     /**
@@ -111,19 +111,22 @@ class CustomerController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Customer  $customer
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
+        $customer = Customer::find($id);
         if ($customer->avatar) {
             Storage::delete($customer->avatar);
         }
-
+        
         $customer->delete();
+        Session::flash('message', "Successfully deleted customer");
+        return Redirect::to('admin/customer');
+    
     }
 }

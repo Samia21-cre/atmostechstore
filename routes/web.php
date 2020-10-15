@@ -46,7 +46,7 @@ Route::group([
  
 //Category
 
-
+Route::get('customer/{id}/delete', 'Admin\CustomerController@destroy');
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('customer', 'Admin\CustomerController');
 });
