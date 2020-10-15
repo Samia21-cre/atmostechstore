@@ -24,7 +24,7 @@
 
   <!-- Main content -->
   <section class="content">
-  <form action="{{ url('product/store') }}" method="POST">
+  <form action="{{ url('product/store') }}" method="POST" enctype="multipart/form-data">
            {{ csrf_field() }}
            @if(count($errors) >0)
                <ul>
@@ -34,15 +34,10 @@
                </ul>
            @endif
     <div class="row">
-      <div class="col-md-6">
-        <div class="card card-primary">
+      <div class="col-md-12">
+        <div class="card card-primary" style="margin-left:100px;margin-right:150px">
           <div class="card-header">
             <h3 class="card-title">General</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-            </div>
           </div>
           <div class="card-body">
             <div class="form-group" >
@@ -54,58 +49,68 @@
               <textarea id="inputDescription" name="txtDesc" class="form-control" rows="4"></textarea>
             </div>
             <div class="form-group">
-              <label for="inputSlug">Slug</label>
-              <input type="text" name="slug" id="inputSlug" class="form-control">
+                <label for="image">Image</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image" id="image">
+                    <label class="custom-file-label" for="image">Choose file</label>
+                </div>
+                @error('image')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="form-group">
-              <label for="inputStatus">Category</label>
-              <select class="form-control" name="parent_id"  value="{{ old('parent_id') }}">
-                    <option value="0">---</option>
-                    @foreach($listCate as $cate)
-                        <option value="{{ $cate->id }}">{{ $cate->name }}</option>
-                    @endforeach
-                </select>
+                <label for="barcode">Barcode</label>
+                <input type="text" name="barcode" class="form-control @error('barcode') is-invalid @enderror"
+                    id="barcode" placeholder="barcode" value="{{ old('barcode') }}">
+                @error('barcode')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" id="price"
+                    placeholder="price" value="{{ old('price') }}">
+                @error('price')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="price">Quantity</label>
+                <input type="text" name="quantity" class="form-control @error('price') is-invalid @enderror" id="price"
+                    placeholder="price" value="{{ old('price') }}">
+                @error('quantity')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
+                    <option value="1" {{ old('status') === 1 ? 'selected' : ''}}>Active</option>
+                    <option value="0" {{ old('status') === 0 ? 'selected' : ''}}>Inactive</option>
+                </select>
+                @error('status')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
           </div>
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
       </div>
-      <div class="col-md-6">
-          <div class="card card-secondary">
-            <div class="card-header">
-              <h3 class="card-title">Budget</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
-              </div>
-            </div>
-            <div class="card-body">
-            <div class="form-group">
-                <label for="inputEstimatedBudget">SKU</label>
-                <input type="number" name="sku" id="inputEstimatedBudget" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputEstimatedBudget">Price</label>
-                <input type="number" name="price" id="inputEstimatedBudget" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputSpentBudget">Sale Price</label>
-                <input type="number" name="saleprice" id="inputSpentBudget" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputEstimatedDuration">Quantity</label>
-                <input type="number" name="quantity" id="inputEstimatedDuration" class="form-control">
-              </div>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-      </div>
       <div class="col-12">
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btn-success" style="margin-left:100px">
             <i class="fa fa-save"></i>
             <span>Save and back</span>
         </button>
@@ -116,5 +121,10 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
+<script src="{{ asset('Admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
 @endsection

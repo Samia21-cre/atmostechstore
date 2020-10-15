@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_admin'
+        'first_name','last_name', 'email', 'password', 'is_admin'
     ];
 
     /**
@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFullname(){
+        return $this->first_name . ' ' . $this->last_name;
+    }
+    public function getAvatar(){
+        return 'https://www.gravatar.com/avatar/HASH' .md5($this->email);
+    }
 }

@@ -1,31 +1,15 @@
 @extends('Admin.app')
 @section('content')
-<div class="wrapper">
-
-
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Edit Product</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Edit Product</li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
-
-  <!-- Main content -->
-  <section class="content">
-  <form action="{{ url('product') }}/{{ $product->id }}" method="POST">
-  <input type="hidden" name="_method" value="GET">
+    <section class="content">
+	 <section class="content-header">
+        <h1>
+            Edit Category
+        </h1>
+    </section>
+    <section class="content">
+        <form action="{{ url('product') }}/{{ $product->id }}" method="POST">
+        	<input type="hidden" name="_method" value="GET">
             {{ csrf_field() }}
             @if(count($errors) >0)
                 <ul>
@@ -34,93 +18,61 @@
                 @endforeach
                 </ul>
             @endif
-    
-    <input type="hidden" value="{{ $product->id }}"></input>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">General</h3>
+            <div class="box">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="txtName" class="form-control @error('name') is-invalid @enderror" id="name"
+                    placeholder="Name" value="{{ old('name', $product->name) }}">
+            </div>
 
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="form-group" >
-              <label for="inputName">Product Name</label>
-              <input type="text" name="txtName" id="inputName" class="form-control" value="{{ $product->name }}">
-            </div>
-            <div class="form-group">
-              <label for="inputDescription">Product Description</label>
-              <textarea id="inputDescription" name="txtDesc" class="form-control" rows="4"  value="{{ $product->desc }}">{{ $product->description }}</textarea>
-            </div>
-            <div class="form-group">
-              <label for="inputSlug">Slug</label>
-              <input type="text" name="slug" id="inputSlug" class="form-control"  value="{{ $product->slug }}">
-            </div>
-            <div class="form-group">
-            <label>Category</label>
-              <select class="form-control" name="parent_id">
-                  <option value="0">---</option>
-                  @foreach($listCate as $cate)
-                            	<option value="{{ $cate->id }}" 
-                            	@foreach($product->categories as $category)
-                            		selected="selected"
-                            	@endforeach
-                            	>{{ $category->name }}</option>
-                  @endforeach
-             </select>
-            </div>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-      </div>
-      <div class="col-md-6">
-          <div class="card card-secondary">
-            <div class="card-header">
-              <h3 class="card-title">Budget</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
-              </div>
-            </div>
-            <div class="card-body">
             <div class="form-group">
-                <label for="inputEstimatedBudget">SKU</label>
-                <input type="number" name="sku" id="inputEstimatedBudget" class="form-control" value="{{ $product->sku }}">
-              </div>
-              <div class="form-group">
-                <label for="inputEstimatedBudget">Price</label>
-                <input type="number" name="price" id="inputEstimatedBudget" class="form-control" value="{{ $product->price }}">
-              </div>
-              <div class="form-group">
-                <label for="inputSpentBudget">Sale Price</label>
-                <input type="number" name="saleprice" id="inputSpentBudget" class="form-control" value="{{ $product->sale_price }}">
-              </div>
-              <div class="form-group">
-                <label for="inputEstimatedDuration">Quantity</label>
-                <input type="number" name="quantity" id="inputEstimatedDuration" class="form-control" value="{{ $product->quantity }}">
-              </div>
+                <label for="description">Description</label>
+                <textarea name="txtDesc" class="form-control @error('description') is-invalid @enderror"
+                    id="description"
+                    placeholder="description">{{ old('description', $product->description) }}</textarea>
             </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-      </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-success">
-            <i class="fa fa-save"></i>
-            <span>Save and back</span>
-        </button>
-       </div>
-    </div>
-    </form>
-  </section>
-  <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+
+            <div class="form-group">
+                <label for="image">Image</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image" id="image">
+                    <label class="custom-file-label" for="image">Choose file</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="barcode">Barcode</label>
+                <input type="text" name="barcode" class="form-control @error('barcode') is-invalid @enderror"
+                    id="barcode" placeholder="barcode" value="{{ old('barcode', $product->barcode) }}">
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" id="price"
+                    placeholder="price" value="{{ old('price', $product->price) }}">
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror"
+                    id="quantity" placeholder="Quantity" value="{{ old('quantity', $product->quantity) }}">
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
+                    <option value="1" {{ old('status', $product->status) === 1 ? 'selected' : ''}}>Active</option>
+                    <option value="0" {{ old('status', $product->status) === 0 ? 'selected' : ''}}>Inactive</option>
+                </select>
+            </div>
+                <div class="box-footer row">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        <span>Save and back</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
 @endsection

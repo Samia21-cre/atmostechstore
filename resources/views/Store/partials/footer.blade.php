@@ -18,7 +18,7 @@
                                                 <i class="zmdi zmdi-pin"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>194 Main Rd T, FS Rayed <br> VIC 3057, USA</p>
+                                                <p>N° 384 LOT BOUTALAMINE ERRACHIDIA 52000 <br> ERRACHIDIA MAROC</p>
                                             </div>
                                         </li>
                                         <li>
@@ -34,7 +34,7 @@
                                                 <i class="zmdi zmdi-phone-in-talk"></i>
                                             </div>
                                             <div class="address-text">
-                                                <p>+012 345 678 102 </p>
+                                                <p>+212707533452 </p>
                                             </div>
                                         </li>
                                     </ul>
@@ -53,12 +53,9 @@
                             <div class="ft__widget">
                                 <h2 class="ft__title">Categories</h2>
                                 <ul class="footer-categories">
-                                    <li><a href="shop-sidebar.html">Men</a></li>
-                                    <li><a href="shop-sidebar.html">Women</a></li>
-                                    <li><a href="shop-sidebar.html">Accessories</a></li>
-                                    <li><a href="shop-sidebar.html">Shoes</a></li>
-                                    <li><a href="shop-sidebar.html">Dress</a></li>
-                                    <li><a href="shop-sidebar.html">Denim</a></li>
+                                    <li><a href="shop-sidebar.html">Arduino</a></li>
+                                    <li><a href="shop-sidebar.html">Raspberry</a></li>
+                                    <li><a href="shop-sidebar.html">Impression-3D</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -110,7 +107,7 @@
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                             <div class="copyright__inner">
                                 <div class="copyright">
-                                    <p>© 2017 <a href="#">your website name</a>
+                                    <p>Développé par  <strong> Samia LOTFI - <a href="#">Atmostech</a>© 2020
                                     All Right Reserved.</p>
                                 </div>
                                 <ul class="footer__menu">

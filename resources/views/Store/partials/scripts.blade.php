@@ -10,3 +10,6 @@
     <script src="{{ asset('Store/js/waypoints.min.js') }}"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="{{ asset('Store/js/main.js') }}"></script>
+  
+   
+ 

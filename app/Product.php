@@ -17,8 +17,8 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'sku', 'name', 'slug', 'description', 'quantity',
-        'price', 'sale_price', 'status', 'featured',
+        'name','image', 'description', 'barcode',
+        'price','quantity', 'status',
     ];
 
     /**
@@ -36,7 +36,6 @@ class Product extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
-        $this->attributes['slug'] = Str::slug($value);
     }
 
     public function categories()

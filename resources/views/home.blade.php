@@ -8,7 +8,7 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    You don't seem to be an admin!
+                    Welcome
                 </div>
             </div>
         </div>

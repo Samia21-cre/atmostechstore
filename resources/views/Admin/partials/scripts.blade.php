@@ -20,5 +20,58 @@
 <!-- ChartJS -->
 <script src="{{ asset('Admin/plugins/chart.js/Chart.min.js') }}"></script>
 
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('.btnDelete').click(function(){
+                var userId = $(this).attr('data-value');
+                $('#confirm')
+                    .modal({ backdrop: 'static', keyboard: false })
+                    .one('click', '#delete', function (e) {
+                        //delete function
+                        var actionLink = "{{ url('/product')}}/"+ userId;
+                        $('#formDelete').attr('action', actionLink).submit();
+                    });
+            });
+        });
+    </script>
+<script src="{{ asset('Admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
 <!-- PAGE SCRIPTS -->
 <script src="{{ asset('Admin/js/pages/dashboard2.js') }}"></script>
+
+<script src="{{ asset('Admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.btn-delete', function () {
+            $this = $(this);
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+                })
+                swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to delete this product?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No',
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    $.post($this.data('url'), {_method: 'DELETE', _token: '{{csrf_token()}}'}, function (res) {
+                        $this.closest('tr').fadeOut(500, function () {
+                            $(this).remove();
+                        })
+                    })
+                }
+            })
+        })
+    })
+</script>

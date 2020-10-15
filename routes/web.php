@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 Route::group([
     'middlware' => 'auth'
@@ -27,10 +28,6 @@ Route::group([
 
     //Product
 
-    /*Route::get('/product', function(){
-        $listProd = \App\Product::with(['categories'])->get();
-        return view('admin.product.index',compact('listProd'));
-    });*/
     Route::get('/product', 'Admin\AdminProductController@index');
     Route::get('product/create', 'Admin\AdminProductController@create');
     Route::post('product/store', 'Admin\AdminProductController@store');
@@ -51,3 +48,6 @@ Route::group([
 //Category
 
 
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::resource('customer', 'Admin\CustomerController');
+});

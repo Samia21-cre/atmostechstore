@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use App\Category;
+use Illuminate\Support\Facades\Storage;
 use App\Product;
 
 class AdminProductController extends Controller
@@ -30,7 +30,8 @@ class AdminProductController extends Controller
      */
     public function index()
     {
-        $listProd = \App\Product::with(['categories'])->get();
+        $listProd =  DB::table('products')
+                    ->orderBy('id','desc')->get();
         $this->data['listProd'] = $listProd;
         return view('Admin.product.index', $this->data);
     }
@@ -42,11 +43,7 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        $this->data['title'] = "Add new Product";
-        $listCate = DB::table('categories')
-            ->orderBy('id','desc')->get();
-        $this->data['listCate'] = $listCate;
-        return view('Admin.product.create', $this->data);
+        return view('Admin.product.create');
     }
 
     /**
@@ -57,24 +54,30 @@ class AdminProductController extends Controller
      */
     public function store(Request $request)
     {
-        $parent_id = $request->get('parent_id');
+        $image_path = '';
+
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('products');
+        }
         $request->validate([
-            'txtName' => 'required'
+            'txtName' => 'required',
+            'image' => 'nullable|image'
         ]);
  
         $product = new Product([
             'name' => $request->get('txtName'),
-            'slug'=> $request->get('slug'),
             'description'=> $request->get('txtDesc'),
-            'sku'=> $request->get('sku'),
-            'price'=> $request->get('price'),
-            'sale_price'=> $request->get('sale_price'),
+            'image'=> $image_path,
             'quantity'=> $request->get('quantity'),
+            'barcode'=> $request->get('barcode'),
+            'price'=> $request->get('price'),
+            'status'=> $request->get('status'),
         ]);
 
         $product->save();
-        $category = Category::find([$parent_id]);
-        $product->categories()->attach($category);
+        if (!$product) {
+            return redirect()->back()->with('error', 'Sorry, there a problem while creating product.');
+        }
         Session::flash('message', "Successfully created product");
         return Redirect::to('product');
         
@@ -100,14 +103,10 @@ class AdminProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $category = Category::find($id);
         $this->data['title'] = 'Edit Product';
         $this->data['product'] = $product;
-        $this->data['category'] = $category;
+
         $this->data['listPro'] = DB::table('products')
-            ->orderBy('id', 'desc')
-            ->get();
-        $this->data['listCate'] = DB::table('categories')
             ->orderBy('id', 'desc')
             ->get();
 
@@ -123,29 +122,36 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $parent_id = $request->get('parent_id');
-        
         $request->validate([
             'txtName' => 'required'
         ]);
- 
+
         $product = Product::find($id);
-        $product->name = $request->get('txtName');
-        $product->slug = $request->get('slug');
-        $product->description = $request->get('txtDesc');
-        $product ->sku = $request->get('sku');
-        $product ->price = $request->get('price');
-        $product ->sale_price = $request->get('sale_price');
-        $product ->quantity = $request->get('quantity');
-
-        $product->update();
-       
-        Session::flash('message', "Successfully updated product");
-        return Redirect::to('product');
-        $category = Category::find([$parent_id]);
-
-        $product->categories()->attach($category);
         
+        $product->name = $request->get('txtName');
+        $product->description = $request->get('txtDesc');
+        $product ->barcode = $request->get('barcode');
+        $product ->price = $request->get('price');
+        $product ->quantity = $request->get('quantity');
+        $product ->status = $request->get('status');
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($product->image) {
+                Storage::delete($product->image);
+            }
+            // Store image
+            $image_path = $request->file('image')->store('products');
+            // Save to Database
+            $product->image = $image_path;
+        }
+
+        if (!$product->save()) {
+            return redirect()->back()->with('error', 'Sorry, there\'re a problem while updating product.');
+        }
+        Session::flash('message', "Successfully updated product");
+        return Redirect::to('product');    
+       
     }
 
     /**
@@ -156,13 +162,13 @@ class AdminProductController extends Controller
      */
     public function destroy($id)
     {
-        /*$parent_id = DB::table('category_product')->select('category_id')->where('product_id', $id)->get();
-        return $parent_id;*/
-        /*$product = Product::find($id);
-        $product->categories()->detach($parent_id);*/
         $product = Product::find($id);
+        if ($product->image) {
+            Storage::delete($product->image);
+        }
+        
         $product->delete();
-        Session::flash('message', "Successfully delete category");
+        Session::flash('message', "Successfully delete product");
         return Redirect::to('product');
     
     }

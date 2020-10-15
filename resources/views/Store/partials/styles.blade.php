@@ -24,3 +24,4 @@
 
     <!-- Modernizr JS -->
     <script src="{{ asset('Store/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+   
