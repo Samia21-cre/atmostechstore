@@ -75,7 +75,7 @@ class CustomerController extends Controller
             return redirect()->back()->with('error', 'Sorry, there a problem while creating customer.');
         }
         Session::flash('message', "Successfully created customer");
-        return Redirect::to('customer');
+        return Redirect::to('admin/customer');
     }
 
     /**
@@ -89,15 +89,23 @@ class CustomerController extends Controller
         //
     }
 
-    /**
+      /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Customer  $customer
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit($id)
     {
-        //
+        $customer = Customer::find($id);
+        $this->data['title'] = 'Edit customer';
+        $this->data['customer'] = $customer;
+
+        $this->data['listCust'] = DB::table('customers')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('Admin.customer.edit', $this->data);
     }
 
     /**

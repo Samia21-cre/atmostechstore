@@ -51,7 +51,7 @@
                     <tr>
                         <td>{{$customer->id}}</td>
                         <td>
-                            <img width="50" src="" alt="">
+                            <img width="50" src="{{ Storage::url( $customer->avatar)}}" alt="">
                         </td>
                         <td>{{$customer->first_name}}</td>
                         <td>{{$customer->last_name}}</td>
