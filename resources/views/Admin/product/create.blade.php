@@ -35,7 +35,7 @@
            @endif
     <div class="row">
       <div class="col-md-12">
-        <div class="card card-primary" style="margin-left:100px;margin-right:150px">
+        <div class="card card-primary" style="">
           <div class="card-header">
             <h3 class="card-title">General</h3>
           </div>
@@ -110,7 +110,7 @@
         <!-- /.card -->
       </div>
       <div class="col-12">
-        <button type="submit" class="btn btn-success" style="margin-left:100px">
+        <button type="submit" class="btn btn-success" style="margin-left:1200px">
             <i class="fa fa-save"></i>
             <span>Save and back</span>
         </button>

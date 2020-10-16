@@ -40,6 +40,29 @@
         bsCustomFileInput.init();
     });
 </script>
+<!-- jQuery -->
+<script src="{{ asset('Admin/plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('Admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ asset('Admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('Admin/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('Admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+<!-- AdminLTE App -->
+<script src="{{ asset('Admin/dist/js/adminlte.min.js') }}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('Admin/dist/js/demo.js') }}"></script>
+<!-- page script -->
 <!-- PAGE SCRIPTS -->
 <script src="{{ asset('Admin/js/pages/dashboard2.js') }}"></script>
 
