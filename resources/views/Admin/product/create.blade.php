@@ -110,7 +110,7 @@
         <!-- /.card -->
       </div>
       <div class="col-12">
-        <button type="submit" class="btn btn-success" style="margin-left:1200px">
+        <button type="submit" class="btn btn-success" >
             <i class="fa fa-save"></i>
             <span>Save and back</span>
         </button>
