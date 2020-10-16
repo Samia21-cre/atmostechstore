@@ -50,6 +50,7 @@
               </p>
             </a>
           </li>
+          </li>
           <li class="nav-item">
             <a href="{{ url('product')}}" class="nav-link">
             <i class="nav-icon fab fa-product-hunt"></i>
@@ -58,6 +59,13 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('settings.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                Settings
+              </p>
+            </a>
           <li class="nav-item">
             <a  href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

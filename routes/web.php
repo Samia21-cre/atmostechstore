@@ -43,8 +43,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     
     Route::resource('customer', 'Admin\CustomerController');
 
-    Route::get('/settings', 'SettingController@index')->name('settings.index');
-    Route::post('/settings', 'SettingController@store')->name('settings.store');
+    Route::get('/settings', 'Admin\SettingController@index')->name('settings.index');
+    Route::post('/settings', 'Admin\SettingController@store')->name('settings.store');
 
     Route::get('/cart', 'CartController@index')->name('cart.index');
     Route::post('/cart', 'CartController@store')->name('cart.store');
