@@ -34,19 +34,21 @@ Route::group([
     Route::get('product/{id}', 'Admin\AdminProductController@update');
     Route::get('product/{id}/delete', 'Admin\AdminProductController@destroy');
 
-    //Category
-    Route::get('/category', 'Admin\AdminCategoryController@index');
-    Route::get('category/create', 'Admin\AdminCategoryController@create');
-    Route::post('category/store', 'Admin\AdminCategoryController@store');
-    Route::get('category/{id}/edit', 'Admin\AdminCategoryController@edit');
-    Route::get('category/{id}', 'Admin\AdminCategoryController@update');
-    Route::get('category/{id}/delete', 'Admin\AdminCategoryController@destroy');
+    //Category);
     });
 
- 
-//Category
 
 Route::get('customer/{id}/delete', 'Admin\CustomerController@destroy');
 Route::prefix('admin')->middleware('auth')->group(function () {
+    
     Route::resource('customer', 'Admin\CustomerController');
+
+    Route::get('/settings', 'SettingController@index')->name('settings.index');
+    Route::post('/settings', 'SettingController@store')->name('settings.store');
+
+    Route::get('/cart', 'CartController@index')->name('cart.index');
+    Route::post('/cart', 'CartController@store')->name('cart.store');
+    Route::post('/cart/change-qty', 'CartController@changeQty');
+    Route::delete('/cart/delete', 'CartController@delete');
+    Route::delete('/cart/empty', 'CartController@empty');
 });
