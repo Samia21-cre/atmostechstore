@@ -60,6 +60,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('cart.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-cart-plus"></i>
+              <p>
+                 Open POS
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('settings.index')}}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>
