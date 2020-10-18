@@ -4,7 +4,7 @@
     <section class="content">
 	 <section class="content-header">
         <h1>
-            Edit Category
+            Edit Product
         </h1>
     </section>
     <section class="content">
