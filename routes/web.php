@@ -47,8 +47,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/settings', 'Admin\SettingController@store')->name('settings.store');
 
     Route::get('/cart', 'Admin\AdminCartController@index')->name('cart.index');
-    Route::post('/cart', 'CartController@store')->name('cart.store');
-    Route::post('/cart/change-qty', 'CartController@changeQty');
+    Route::post('/cart', 'Admin\AdminCartController@store')->name('cart.store');
+    Route::post('/cart/change-qty', 'Admin\AdminCartController@changeQty');
     Route::delete('/cart/delete', 'CartController@delete');
     Route::delete('/cart/empty', 'CartController@empty');
 });

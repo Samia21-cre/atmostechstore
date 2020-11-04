@@ -30,8 +30,8 @@
         @include('Admin.partials.sidebar') 
         
             @yield('content')
-            </section>
-        </div>
+            
+      </div>
         @include('Admin.partials.scripts')
 </body>
 </html>

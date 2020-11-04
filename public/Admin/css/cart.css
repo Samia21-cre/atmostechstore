@@ -1,0 +1,27 @@
+#inpr{
+    width:70px;
+    float:left;
+}
+
+#card{
+    height: 400px;
+}
+
+.imgcart{
+    text-align:center;
+    font-size:13px;
+}
+
+.item{
+    float: left;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    margin: 0 2px 4px;
+}
+
+.imgitem{
+    max-width: 100%; 
+    width:100px; 
+    height: 100px;
+}
